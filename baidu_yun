@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+
+require 'rest-client'
+file_path_to_upload = ARGV[0]
+
+file_name = File.basename file_path_to_upload
+
+path = CGI::escape("/apps/peteryun/#{file_name}")
+upload_url = "https://c.pcs.baidu.com/rest/2.0/pcs/file?method=upload&path=#{path}&access_token=23.a5108c69c047db36c261588e14ee1923.2592000.1406954960.2231931068-3061185"
+
+response = RestClient.post upload_url, file: File.new(file_path_to_upload)
+
+puts "the response is #{response}"
